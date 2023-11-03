@@ -13,11 +13,12 @@ public class Fibonacci {
     }
 
     private BigInteger _internal_recursive(int n, BigInteger[] memory) {
-        if (n < 2) {
-            memory[n] = BigInteger.valueOf(n);
+        if (memory[n] != null) {
             return memory[n];
         }
-        if (memory[n] != null) {
+
+        if (n < 2) {
+            memory[n] = BigInteger.valueOf(n);
             return memory[n];
         }
 
@@ -25,6 +26,14 @@ public class Fibonacci {
                 _internal_recursive(n-2, memory));
 
         return memory[n];
+    }
+
+    public BigInteger recursive_no_optimization(int n) {
+        if (n < 2) {
+            return BigInteger.valueOf(n);
+        }
+
+        return recursive_no_optimization(n-1).add(recursive_no_optimization(n-2));
     }
 
     public BigInteger iterative(int n) {
